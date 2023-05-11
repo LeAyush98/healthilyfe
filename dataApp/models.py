@@ -15,8 +15,8 @@ class HealthData(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
-class Calculations(models.Model):
-    HEALTH_CHOICES = [("bmi", "BMI Calculator"), ("body fat", "Body Fat Calculator (needs BMI)"), ("ideal weight in kg", "Ideal Weight Calculator in Kg"), 
+class Calculation(models.Model):
+    HEALTH_CHOICES = [("bmi", "BMI Calculator"), ("body fat", "Body Fat Calculator"), ("ideal weight", "Ideal Weight Calculator"), 
                       ("calorie", "Calorie Intake Calculator")]    
     health_data = models.CharField(max_length=30, choices= HEALTH_CHOICES)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

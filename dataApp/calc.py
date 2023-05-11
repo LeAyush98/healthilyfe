@@ -1,0 +1,2 @@
+# answer = math.ceil(float(data.data_value.split("/")[1]) / (float(data.data_value.split("/")[0]) * float(data.data_value.split("/")[0])))
+#                     messages.success(request, f"Your BMI is {answer}")

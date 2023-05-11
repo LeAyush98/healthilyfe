@@ -1,5 +1,5 @@
 from django import forms
-from dataApp.models import HealthData, Calculations
+from dataApp.models import HealthData, Calculation
 
 class HealthDataForm(forms.ModelForm):
     class Meta:
@@ -8,5 +8,5 @@ class HealthDataForm(forms.ModelForm):
 
 class CalculationsForm(forms.ModelForm):
     class Meta:
-        model = Calculations
+        model = Calculation
         fields = ("health_data",)        
