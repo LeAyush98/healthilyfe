@@ -16,10 +16,12 @@ Including another URLconf
 """
 
 from django.urls import path
-from dataApp.views import initial, second, final
+from dataApp.views import initial, second, final, delete_calc_data, delete_health_data
 
 urlpatterns = [
   path("initial/", initial, name="initial"),
   path("second/" , second, name="second"),
-  path("final/", final, name="final")
+  path("final/", final, name="final"),
+  path("delete/health/<int:id>", delete_health_data, name="dhealth"),
+  path("delete/calc/<int:id>", delete_calc_data, name="dcalc")
 ]

@@ -111,5 +111,24 @@ def final(request):
     calculated_data = Calculation.objects.filter(user_id = request.user.id)
     return render(request, "dataApp/final.html", {"health_data" : health_data, "calculated_data" : calculated_data})
 
+@login_required
+def delete_health_data(request, id):
+    data = HealthData.objects.get(id = id)
+    if data.user_id == request.user.id:
+        data.delete()
+        messages.success(request, "Data deleted successfully.")
+        return redirect("final")
+    else:
+        messages.error(request, "You do not have permission to do that.")
+        return redirect('home')
 
-
+@login_required
+def delete_calc_data(request, id):
+    data = Calculation.objects.get(id = id)
+    if data.user_id == request.user.id:
+        data.delete()
+        messages.success(request, "Data deleted successfully.")
+        return redirect("final")
+    else:
+        messages.error(request, "You do not have permission to do that.")
+        return redirect('home')
