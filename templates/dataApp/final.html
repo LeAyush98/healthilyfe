@@ -58,7 +58,7 @@
 
 		<!-- Main -->
         <div id="main">
-            <div class="box alt container" style="padding-bottom: 12%;">
+            <div class="box alt container fix" style="padding-bottom: 12%;">
                 <section class="feature left">
                     <a href="{% url 'home'%}" class="image icon solid fa-calculator"><img src="{% static 'images/pic02.jpg'%}" alt="" /></a>
                     <div class="content">
@@ -91,6 +91,8 @@
                         {% endfor %}
                             </tbody>
                         </table>
+                        {% else %}
+                        <h6>Please add some data first, {{user.first_name}}</h6>
                         {% endif %}
                         <hr style="border-top: 1px dotted gray;">
                         {% if calculated_data %}

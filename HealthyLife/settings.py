@@ -30,6 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#for google auth
+SITE_ID = 2
 
 # Application definition
 
@@ -42,8 +44,23 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "mainApp",
     "authApp",
-    "dataApp"
+    "dataApp",
+
+    #additional apps for google auth
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google"
 ]
+
+# for google auth
+SOCIALACCOUNT_PROVIDERS = {
+    "google" : {
+        "SCOPE" : ["profile", "email"],
+        "AUTH_PARAMS" : {"access_type" : "online"}
+    }
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -131,3 +148,13 @@ STATICFILES_DIRS = [STATIC_DIR,]
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# for google auth
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend"
+)
+
+# for google auth
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"

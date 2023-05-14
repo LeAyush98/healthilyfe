@@ -3079,6 +3079,10 @@ input, select, textarea {
 				font-size: 12pt;
 			}
 
+			div.fix{
+				padding-bottom: 40%;
+			}
+
 	}
 
 /* Narrower */
@@ -3095,6 +3099,10 @@ input, select, textarea {
 			footer.major {
 				padding-left: 2em;
 				padding-right: 2em;
+			}
+
+			div.fix{
+				padding-bottom: 60%;
 			}
 
 	}
