@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 import smtplib
 from dotenv import load_dotenv
 import os
+from django.contrib import messages
 
 load_dotenv(".env")
 
@@ -22,10 +23,13 @@ def mail(name, email, message):
 # Create your views here.
 def home(request):
     if request.method == "POST":
-        name = request.POST["contactName"]
-        email = request.POST["contactEmail"]
-        message = request.POST["contactMessage"]
-        mail(name,email,message)
+        if request.POST["contactName"] and request.POST["contactEmail"] and request.POST["contactMessage"]:
+            name = request.POST["contactName"]
+            email = request.POST["contactEmail"]
+            message = request.POST["contactMessage"]
+            mail(name,email,message)
+        else:
+            messages.error(request, "Please add all your details before sending message.")    
         return redirect("home")
  
     return render(request, "mainApp/index.html", {})
