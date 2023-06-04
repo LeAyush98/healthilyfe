@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv(".env")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +26,7 @@ STATIC_DIR = os.path.join(BASE_DIR,"static")
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-nsix3hu5&cfqzcsa)iqs1towhb+5@%q_e9+%k#au+kats$+yy4"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -101,7 +104,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "HealthyLife",
         "USER": "root",
-        "PASSWORD": "@34Aslkdfkj@9@"
+        "PASSWORD": os.getenv("DB_PASSWORD")
     }
 }
 

@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 import smtplib
+from dotenv import load_dotenv
+import os
+
+load_dotenv(".env")
 
 def mail(name, email, message):
-    EMAIL = "ayu.sharma798@gmail.com"
-    PASSWORD = "tsacklmdhsjpvqtx"
+    EMAIL = os.getenv("EMAIL")
+    PASSWORD = os.getenv("PASSWORD")
 
     connection = smtplib.SMTP("smtp.gmail.com")
     connection.starttls()
