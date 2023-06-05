@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-from dotenv import load_dotenv
+import boto3
 
-load_dotenv(".env")
+AWS_REGION = "ap-south-1"
+ssm_client = boto3.client("ssm", region_name=AWS_REGION)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,7 @@ STATIC_DIR = os.path.join(BASE_DIR,"static")
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = ssm_client.get_parameter(Name='healthilyfe_secret_key', WithDecryption=True)['Parameter']['Value']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -104,7 +105,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "HealthyLife",
         "USER": "root",
-        "PASSWORD": os.getenv("DB_PASSWORD")
+        "PASSWORD": ssm_client.get_parameter(Name='healthilyfe_db_password', WithDecryption=True)['Parameter']['Value']
     }
 }
 
