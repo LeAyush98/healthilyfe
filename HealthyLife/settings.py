@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import boto3
+import dj_database_url
 
 AWS_REGION = "ap-south-1"
 ssm_client = boto3.client("ssm", region_name=AWS_REGION)
@@ -30,12 +31,12 @@ STATIC_DIR = os.path.join(BASE_DIR,"static")
 SECRET_KEY = ssm_client.get_parameter(Name='healthilyfe_secret_key', WithDecryption=True)['Parameter']['Value']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-13-126-26-5.ap-south-1.compute.amazonaws.com']
 
 #for google auth
-SITE_ID = 2
+SITE_ID = 3
 
 # Application definition
 
@@ -101,12 +102,7 @@ WSGI_APPLICATION = "HealthyLife.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "HealthyLife",
-        "USER": "root",
-        "PASSWORD": ssm_client.get_parameter(Name='healthilyfe_db_password', WithDecryption=True)['Parameter']['Value']
-    }
+    "default": dj_database_url.parse(url=ssm_client.get_parameter(Name='healthilyfe_dj_database_url', WithDecryption=True)['Parameter']['Value'])
 }
 
 
