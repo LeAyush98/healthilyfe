@@ -9,10 +9,15 @@
 <li>Daily Calorie Intake</li>
 <li>Ideal Weight</li>
 </ul>
+<br>
+<p>Finally, using Seaborn for plotting graphs, BMI and weight are dynamically plotted on a graph and displayed on the website. Asyncio is used for faster graph output. </p>
 
-<h2>See it in action!</h2>
-<p>Live AWS link: http://ec2-13-126-26-5.ap-south-1.compute.amazonaws.com:8000/</p>
-<p>Uses AWS RDS's PostgreSQL RDBMS and SSM's Parameter Store for securely saving important tokens</p>
+<h2>AWS Version</h2>
+<p>This web application was hosted on my EC2 instance: http://ec2-13-126-26-5.ap-south-1.compute.amazonaws.com:8000/</p>
+<p>Used AWS RDS's Postgres RDBMS and SSM's Parameter Store for securely saving important tokens.</p>
+
+<h2>Current Development Version</h2>
+<p>Latest version is a development build, that uses my local Postgres db. Important tokens are saved locally. </p>
 
 <h2>Special thanks to</h2>
 <p>https://html5up.net/ for front-end inspiration</p>
