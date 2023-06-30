@@ -2912,6 +2912,7 @@ input, select, textarea {
 		padding: 6em 0 5em 0;
 		position: relative;
 		z-index: 1;
+		
 	}
 
 		#main:before {
@@ -2929,6 +2930,30 @@ input, select, textarea {
 		#main footer.major {
 			background: #ffffff;
 		}
+
+		#main_final {
+			padding: 6em 0 5em 0;
+			position: relative;
+			z-index: 1;
+			height: 150%;
+			
+		}
+	
+			#main_final:before {
+				background: rgba(224, 224, 224, 0.75);
+				content: '';
+				height: 100%;
+				left: 50%;
+				position: absolute;
+				top: 0;
+				width: 1px;
+				z-index: -1;
+			}
+	
+			#main_final header.major,
+			#main_final footer.major {
+				background: #ffffff;
+			}
 
 /* Wide */
 
@@ -3318,3 +3343,8 @@ input, select, textarea {
 	#mybar{
 		padding-bottom: 5%;
 	}
+
+img.graph{
+	max-width: 100%;
+	height: auto;
+}	

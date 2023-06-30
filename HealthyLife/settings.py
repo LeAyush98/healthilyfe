@@ -13,7 +13,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import boto3
-import dj_database_url
+from dotenv import load_dotenv
+
+import matplotlib
+matplotlib.use('Agg')
+
+load_dotenv(".env")
 
 AWS_REGION = "ap-south-1"
 ssm_client = boto3.client("ssm", region_name=AWS_REGION)
@@ -28,15 +33,16 @@ STATIC_DIR = os.path.join(BASE_DIR,"static")
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ssm_client.get_parameter(Name='healthilyfe_secret_key', WithDecryption=True)['Parameter']['Value']
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-13-126-26-5.ap-south-1.compute.amazonaws.com']
+ALLOWED_HOSTS = ['ec2-13-126-26-5.ap-south-1.compute.amazonaws.com', '127.0.0.1']
 
 #for google auth
 SITE_ID = 3
+
 
 # Application definition
 
@@ -102,9 +108,13 @@ WSGI_APPLICATION = "HealthyLife.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": dj_database_url.parse(url=ssm_client.get_parameter(Name='healthilyfe_dj_database_url', WithDecryption=True)['Parameter']['Value'])
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "healthylife",
+        "USER": "root",
+        "PASSWORD": os.getenv("DB_PASSWORD")
+    }
 }
-
 
 
 # Password validation

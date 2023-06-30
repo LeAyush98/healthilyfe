@@ -57,10 +57,10 @@
 		
 
 		<!-- Main -->
-        <div id="main">
+        <div id="main_final">
             <div class="box alt container fix" style="padding-bottom: 12%;">
                 <section class="feature left">
-                    <a href="{% url 'home'%}" class="image icon solid fa-calculator"><img src="{% static 'images/pic02.jpg'%}" alt="" /></a>
+                    <a href="{% url 'home'%}" class="image icon solid fa-map"><img src="{% static 'images/pic02.jpg'%}" alt="" /></a>
                     <div class="content">
                         {% if messages %}
                         {% for message in messages%}
@@ -70,54 +70,15 @@
                         {%endfor%}
                         {%endif %} 
                         {% if health_data %}
-                        <table class="table table-borderless">
-                            <thead>
-                                <tr>
-                                    <th scope="col"><strong>S. No.</strong></th>
-                                    <th scope="col"><strong>Health Data</strong></th>
-                                    <th scope="col"><strong>Data Value</strong></th>
-                                    <th scope="col"><strong>Date and Time</strong></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                        {% for data in health_data reversed %}
-                               <tr>
-                                <td>{{forloop.counter}}</td>
-                                <td>{{data.health_data | titleCase}}</td>
-                                <td>{{data.data_value}}</td>
-                                <td>{{data.date_time}} <a class="btn btn-outline-light" href="{% url 'dhealth' id=data.id%}" role="button">❌</a></td>
-                                
-                                </tr>
-                        {% endfor %}
-                            </tbody>
-                        </table>
-                        {% else %}
-                        <h6>Please add some data first, {{user.first_name}}</h6>
-                        {% endif %}
+                        <img class="graph" src="{% static 'images/weight.png'%}" alt="">
                         <hr style="border-top: 1px dotted gray;">
-                        {% if calculated_data %}
-                        <table class="table table-borderless">
-                          <thead>
-                              <tr>
-                                  <th scope="col"><strong>S. No.</strong></th>
-                                  <th scope="col"><strong>Health Data</strong></th>
-                                  <th scope="col"><strong>Data Value</strong></th>
-                                  <th scope="col"><strong>Date and Time</strong></th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                            {% for data in calculated_data reversed %}
-                               <tr>
-                                <td>{{forloop.counter}}</td>
-                                <td>{{data.health_data | titleCase}}</td>
-                                <td>{{data.data_value}}</td>
-                                <td>{{data.date_time}}<a class="btn btn-outline-light" href="{% url 'dcalc' id=data.id%}" role="button">❌</a></td>
-                               </tr>
-                        {% endfor %}
-                            </tbody>
-                        </table>
+                        {% else %}
+                        <p>Please add some data first.</p>
                         {% endif %}
-
+                        {% if calculated_data %}
+                        <img class="graph" src="{% static 'images/bmi.png'%}" alt="">
+                        <hr style="border-top: 1px dotted gray;">
+                        {% endif %}
                     </div>
                 </section>
             </div>    
